@@ -27,11 +27,12 @@ type GithubReleases struct {
 	Name   string `json:"name"`
 }
 
-func validateGithubApiEndpoint(githubApiEndpoint string) {
+func ValidateGithubApiEndpoint(githubApiEndpoint string) bool {
 	if githubApiEndpoint != "releases" && githubApiEndpoint != "pulls" {
 		fmt.Println("githubApiEndpoint must be either pulls or releases. Try -e pulls")
-		os.Exit(1)
+		return false
 	}
+	return true
 }
 
 func getJsonData(url string) string {
@@ -105,7 +106,8 @@ func main() {
 	flag.StringVar(&githubRepoUrl, "i", "https://api.github.com/repos/mailchimp/mc-magento2", "Specify github repo URL")
 	flag.Parse()
 
-	validateGithubApiEndpoint(githubApiEndpoint)
+	ValidateGithubApiEndpoint(githubApiEndpoint)
+
 
 	// append query string to API URL. see https://docs.github.com/en/rest/pulls/pulls
 	queryString := fmt.Sprintf("%v%v", "per_page=", resultCount)
