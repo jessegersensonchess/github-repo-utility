@@ -28,8 +28,8 @@ docker run --rm -it github-repo-utility:latest -h
 
 To do
 ------------
- - add unit tests
- - add github action to build container
+ - add unit tests to get better coverage
+ - add "go test" step to github action workflow
  - edit/improve logging text
  - reconsider regex implementation
  - (optional) add -b [branch] switch
