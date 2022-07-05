@@ -23,7 +23,7 @@ docker run --rm -it github-repo-utility:latest
 Help
 --------
 ```
-docker run --rm -it github-repo-utility:latest help
+docker run --rm -it github-repo-utility:latest -h
 ```
 
 To do
