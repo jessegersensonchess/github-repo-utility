@@ -1,4 +1,4 @@
-Currency converter
+Github repo utility
 =======================
 A github API command-line utility which fetches the most recent pull requests, or most recent releases, for a github repo. 
 
