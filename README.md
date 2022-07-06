@@ -35,6 +35,7 @@ To do
  - better test coverage && add test fixtures
  - add "go test" step to github action workflow
  - edit/improve logging text
+ - combine duplicate functions: listGithubReleases, listGithubPulls 
  - reconsider regex implementation
  - (optional) add -b [branch] switch
  - (optional) remove default repo URL
