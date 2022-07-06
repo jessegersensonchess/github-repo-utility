@@ -5,18 +5,22 @@ A github API command-line utility which fetches the most recent pull requests, o
 Example usage: 
 -----------
 ```
-go run main.go -e pulls -i https://api.github.com/repos/mailchimp/mc-woocommerce
+./github-repo-utility -e pulls -i https://api.github.com/repos/mailchimp/mc-woocommerce
 ``` 
+Build:
+--------
+```
+go build -o github-repo-utility
+```
 
 Docker:
 -----------
-Build a docker image with:
+Build:
 ```
 docker build -t github-repo-utility:latest .
 ```
 
-Run the docker image
-
+Run:
 ```
 docker run --rm -it github-repo-utility:latest 
 ```
@@ -34,5 +38,4 @@ To do
  - reconsider regex implementation
  - (optional) add -b [branch] switch
  - (optional) remove default repo URL
- - (optional) add metrics 
-
+ - (optional) add metrics "hooks"
