@@ -23,14 +23,14 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: CGO_ENABLED=0 go build -o github-utility -v ./... && pwd && ls -al
+      run: CGO_ENABLED=0 go build -o github-utility.bin -v ./... && chmod +x github-utility.bin && sha256sum github-utility.bin && ls -al
 
     - name: Test
       run: go test -v ./...
     
     - name: Upload 
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
-        name: myupload
-        path: ./github-utility
+        name: github-utility.bin
+        path: ./github-utility.bin
         
