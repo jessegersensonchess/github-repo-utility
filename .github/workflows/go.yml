@@ -31,5 +31,6 @@ jobs:
     - name: Upload 
       uses: actions/upload-artifact@v2
       with:
-        name: github-utility
+        name: myupload
+        path: ./github-utility
         
