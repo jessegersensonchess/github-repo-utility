@@ -60,5 +60,5 @@ jobs:
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
         asset_path: github-utility
-        asset_name: github-utility-v0.0.${{github.run_number}}
+        asset_name: github-utility
         asset_content_type: application/zip 
