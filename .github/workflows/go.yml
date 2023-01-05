@@ -23,7 +23,7 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: CGO_ENABLED=0 go build -o github-utility.bin -v ./... && chmod +x github-utility.bin && sha256sum github-utility.bin && ls -al
+      run: CGO_ENABLED=0 go build -o github-utility -v ./... && chmod +x github-utility && sha256sum github-utility && ls -al
 
     - name: Test
       run: go test -v ./...
