@@ -42,6 +42,8 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: github-utility
+    - name: Set permissions
+      run: chmod +x github-utility && sha256sum github-utility && ls -al
     - name: 'Create GitHub Release'
       id: create-new-release
       uses: actions/create-release@v1
