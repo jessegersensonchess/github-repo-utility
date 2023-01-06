@@ -6,8 +6,11 @@ name: Go
 on:
   workflow_dispatch:
   push:
+    branches: [ "main" ]
     tags:
       - 'release'
+  schedule:
+    - cron: "00 06 * * 6"
   pull_request:
     branches: [ "main" ]
 
