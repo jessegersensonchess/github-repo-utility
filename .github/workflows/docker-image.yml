@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   schedule:
-    - cron: "9 * * * *"
+    - cron: "00 0,12 * * 1,6"
   push:
     branches: [ "DISABLED-main" ]
   pull_request:
