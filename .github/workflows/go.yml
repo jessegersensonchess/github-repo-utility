@@ -28,7 +28,7 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: CGO_ENABLED=0 go build -ldflags="-s -w" -o $binary -v ./... && chmod +x $binary && sha256sum $binary && ls -al
+      run: CGO_ENABLED=0 go build -ldflags="-s -w" -o ${{ env.binary }} -v ./... && chmod +x ${{ env.binary }}
 
     - name: Test
       run: go test -v ./...
@@ -36,7 +36,7 @@ jobs:
     - name: Upload 
       uses: actions/upload-artifact@v3
       with:
-        name: $binary
+        name: ${{ env.binary }}
         path: ./
         
   release-content:
@@ -46,9 +46,9 @@ jobs:
     - name: 'Download Artifact'
       uses: actions/download-artifact@v3
       with:
-        name: $binary
+        name: ${{ env.binary }}
     - name: Set permissions
-      run: chmod +x $binary && sha256sum $binary && ls -al
+      run: chmod +x ${{ env.binary }}
     - name: 'Create GitHub Release'
       id: create-new-release
       uses: actions/create-release@v1
@@ -63,6 +63,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: $binary
-        asset_name: $binary
+        asset_path: ${{ env.binary }}
+        asset_name: ${{ env.binary }}
         asset_content_type: application/zip 
