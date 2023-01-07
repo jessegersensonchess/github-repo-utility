@@ -2,7 +2,8 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
 
 name: Go
-
+env:
+  binary: github-utility
 on:
   workflow_dispatch:
   push:
@@ -27,7 +28,7 @@ jobs:
         go-version: 1.19
 
     - name: Build
-      run: CGO_ENABLED=0 go build -ldflags="-s -w" -o github-utility -v ./... && chmod +x github-utility && sha256sum github-utility && ls -al
+      run: CGO_ENABLED=0 go build -ldflags="-s -w" -o $binary -v ./... && chmod +x $binary && sha256sum $binary && ls -al
 
     - name: Test
       run: go test -v ./...
@@ -35,7 +36,7 @@ jobs:
     - name: Upload 
       uses: actions/upload-artifact@v3
       with:
-        name: github-utility
+        name: $binary
         path: ./
         
   release-content:
@@ -45,9 +46,9 @@ jobs:
     - name: 'Download Artifact'
       uses: actions/download-artifact@v3
       with:
-        name: github-utility
+        name: $binary
     - name: Set permissions
-      run: chmod +x github-utility && sha256sum github-utility && ls -al
+      run: chmod +x $binary && sha256sum $binary && ls -al
     - name: 'Create GitHub Release'
       id: create-new-release
       uses: actions/create-release@v1
@@ -62,6 +63,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create-new-release.outputs.upload_url }}
-        asset_path: github-utility
-        asset_name: github-utility
+        asset_path: $binary
+        asset_name: $binary
         asset_content_type: application/zip 
