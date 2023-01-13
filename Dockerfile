@@ -3,10 +3,10 @@ RUN	mkdir /build && \
 	cd /build
 WORKDIR "/build"
 COPY	. ./
-RUN	CGO_ENABLED=0 go build -o github-repo-utility
+RUN	CGO_ENABLED=0 go build -ldflags="-s -w" -o github-utility
 
 FROM	alpine:3.15 
-COPY	--from=builder /build/github-repo-utility .
+COPY	--from=builder /build/github-utility .
 RUN	addgroup -S appgroup && adduser -S appuser -G appgroup
 USER	appuser
-ENTRYPOINT [ "./github-repo-utility" ]
+ENTRYPOINT [ "./github-utility" ]
