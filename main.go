@@ -74,7 +74,7 @@ func listGithubReleases(url string) {
 
 	for _, v := range githubBlob {
 		processedString := regex.ReplaceAllString(v.Name, " ")
-		fmt.Printf("'%s'\n", processedString)
+		fmt.Printf("%s\n", processedString)
 	}
 }
 
@@ -92,7 +92,7 @@ func listGithubPulls(url string) {
 
 	for _, v := range githubBlob {
 		processedString := regex.ReplaceAllString(v.Title, " ")
-		fmt.Printf("%v, '%s'\n", v.Number, processedString)
+		fmt.Printf("%v, %s\n", v.Number, processedString)
 	}
 }
 
@@ -108,7 +108,6 @@ func main() {
 
 	ValidateGithubApiEndpoint(githubApiEndpoint)
 
-
 	// append query string to API URL. see https://docs.github.com/en/rest/pulls/pulls
 	queryString := fmt.Sprintf("%v%v", "per_page=", resultCount)
 
@@ -116,8 +115,10 @@ func main() {
 	url := fmt.Sprintf("%v/%s?%v", githubRepoUrl, githubApiEndpoint, queryString)
 
 	switch {
-		case githubApiEndpoint == "pulls" : 	listGithubPulls(url)
-		case githubApiEndpoint == "releases" : listGithubReleases(url)
+	case githubApiEndpoint == "pulls":
+		listGithubPulls(url)
+	case githubApiEndpoint == "releases":
+		listGithubReleases(url)
 	}
 
 }
