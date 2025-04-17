@@ -2,6 +2,7 @@
 package main
 
 import (
+	"embed"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -9,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"strings"
 )
 
 // Github REST API Pulls reference: https://docs.github.com/en/rest/pulls/pulls
@@ -96,7 +98,23 @@ func listGithubPulls(url string) {
 	}
 }
 
+//go:embed VERSION_NUMBER
+var files embed.FS
+
+// read it at init time
+var version = func() string {
+	data, err := files.ReadFile("VERSION_NUMBER")
+	if err != nil {
+		return "unknown"
+	}
+	return strings.TrimSpace(string(data))
+}()
+
 func main() {
+	if len(os.Args) > 1 && os.Args[1] == "version" {
+		fmt.Println(version)
+		os.Exit(0)
+	}
 
 	// COMMAND LINE switches
 	var resultCount int
