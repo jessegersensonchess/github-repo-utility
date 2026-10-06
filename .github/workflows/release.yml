@@ -8,7 +8,7 @@ on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron: "00 06 * * 6"
+    - cron: "45 01 * * 6"
   pull_request:
     branches: [ "main" ]
 
